@@ -14,8 +14,13 @@ namespace RecREC
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+             CreateHostBuilder(args).ConfigureAppConfiguration((hostingContext, config) =>
+             {
+                    config.AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true); 
+            }).Build().Run();
+            }
+    }
+}
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
@@ -23,5 +28,3 @@ namespace RecREC
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-    }
-}
